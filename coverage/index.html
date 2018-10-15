@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2018-10-15T01:53:22+00:00">2018-10-15T01:53:22+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2018-10-15T20:04:02+00:00">2018-10-15T20:04:02+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -32,9 +32,9 @@
   <a name="AllFiles"></a>
   <div>
     <b>5</b> files in total.
-    <b>75</b> relevant lines. 
+    <b>78</b> relevant lines. 
     <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>75</b> lines missed </span>
+    <span class="red"><b>78</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -63,10 +63,10 @@
       <tr>
         <td class="strong"><a href="#dd332237b3a288de2e05c13e63bafa7271b1b5a6" class="src_link" title="app/controllers/movies_controller.rb">app/controllers/movies_controller.rb</a></td>
         <td class="red strong">0.0 %</td>
-        <td>74</td>
-        <td>60</td>
+        <td>72</td>
+        <td>58</td>
         <td>0</td>
-        <td>60</td>
+        <td>58</td>
         <td>0.0</td>
       </tr>
       
@@ -93,10 +93,10 @@
       <tr>
         <td class="strong"><a href="#2f404ddca4b5f824cc907db6897b6bccbefc4cac" class="src_link" title="app/models/movie.rb">app/models/movie.rb</a></td>
         <td class="red strong">0.0 %</td>
-        <td>6</td>
-        <td>5</td>
+        <td>11</td>
+        <td>10</td>
         <td>0</td>
-        <td>5</td>
+        <td>10</td>
         <td>0.0</td>
       </tr>
       
@@ -120,9 +120,9 @@
   <a name="Controllers"></a>
   <div>
     <b>2</b> files in total.
-    <b>63</b> relevant lines. 
+    <b>61</b> relevant lines. 
     <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>63</b> lines missed </span>
+    <span class="red"><b>61</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -151,10 +151,10 @@
       <tr>
         <td class="strong"><a href="#dd332237b3a288de2e05c13e63bafa7271b1b5a6" class="src_link" title="app/controllers/movies_controller.rb">app/controllers/movies_controller.rb</a></td>
         <td class="red strong">0.0 %</td>
-        <td>74</td>
-        <td>60</td>
+        <td>72</td>
+        <td>58</td>
         <td>0</td>
-        <td>60</td>
+        <td>58</td>
         <td>0.0</td>
       </tr>
       
@@ -177,9 +177,9 @@
   <a name="Models"></a>
   <div>
     <b>1</b> files in total.
-    <b>5</b> relevant lines. 
+    <b>10</b> relevant lines. 
     <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>5</b> lines missed </span>
+    <span class="red"><b>10</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -198,10 +198,10 @@
       <tr>
         <td class="strong"><a href="#2f404ddca4b5f824cc907db6897b6bccbefc4cac" class="src_link" title="app/models/movie.rb">app/models/movie.rb</a></td>
         <td class="red strong">0.0 %</td>
-        <td>6</td>
-        <td>5</td>
+        <td>11</td>
+        <td>10</td>
         <td>0</td>
-        <td>5</td>
+        <td>10</td>
         <td>0.0</td>
       </tr>
       
@@ -430,9 +430,9 @@
     <h3>app/controllers/movies_controller.rb</h3>
     <h4><span class="red">0.0 %</span> covered</h4>
     <div>
-      <b>60</b> relevant lines. 
+      <b>58</b> relevant lines. 
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>60</b> lines missed.</span>
+      <span class="red"><b>58</b> lines missed.</span>
     </div>
   </div>
   
@@ -826,58 +826,46 @@
         <li class="missed" data-hits="0" data-linenumber="65">
           
           
-          <code class="ruby">    @movie = Movie.find(params[:id])</code>
+          <code class="ruby">    @similar_movies = Movie.similar_movies(params[:title])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="66">
           
           
-          <code class="ruby">    if @movie.director.blank?</code>
+          <code class="ruby">    if @similar_movies.nil?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="67">
           
           
-          <code class="ruby">      flash[:notice] = &quot;&#39;#{@movie.title}&#39; has no director info&quot;</code>
+          <code class="ruby">      redirect_to movies_path, alert: &quot;&#39;#{params[:title]}&#39; has no director info&quot;</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="68">
           
           
-          <code class="ruby">      redirect_to movies_path</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="69">
           
           
-          <code class="ruby">    else</code>
+          <code class="ruby">    @movie = Movie.find_by(title: params[:title])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="70">
           
           
-          <code class="ruby">      @movies = Movie.where(:director =&gt; @movie.director)</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="71">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="72">
-          
-          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="73">
+        <li class="never" data-hits="" data-linenumber="71">
           
           
           <code class="ruby">  </code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="74">
+        <li class="missed" data-hits="0" data-linenumber="72">
           
           
           <code class="ruby">end</code>
@@ -979,9 +967,9 @@
     <h3>app/models/movie.rb</h3>
     <h4><span class="red">0.0 %</span> covered</h4>
     <div>
-      <b>5</b> relevant lines. 
+      <b>10</b> relevant lines. 
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>5</b> lines missed.</span>
+      <span class="red"><b>10</b> lines missed.</span>
     </div>
   </div>
   
@@ -1019,6 +1007,36 @@
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="6">
+          
+          
+          <code class="ruby">  def self.similar_movies movie_title</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="7">
+          
+          
+          <code class="ruby">    director = Movie.find_by(title: movie_title).director</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="8">
+          
+          
+          <code class="ruby">    return nil if director.blank? or director.nil?</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="9">
+          
+          
+          <code class="ruby">    Movie.where(director: director).pluck(:title)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="10">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="11">
           
           
           <code class="ruby">end</code>

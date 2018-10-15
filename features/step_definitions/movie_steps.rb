@@ -1,15 +1,11 @@
-Given /the following movies exist/ do |table|
-  movies_table.hashes.each do |movie|
-    Movie.create(movie)
+Given /^the following movies exist:$/ do |movie_table|
+  movie_table.hashes.each do |movie_hash|
+    Movie.create movie_hash
   end
 end
 
-Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |movie_title, director_name|
-  if page.respond_to? :should
-    page.should have_content(movie_title)
-    page.should have_content(director_name)
-  else
-    assert page.has_content?(movie_title)
-    assert page.has_content?(director_name)
-  end
+Then /^the director of "(.+)" should be "(.+)"/ do |movie_name, movie_director|
+  movie = Movie.find_by(title: movie_name)
+  visit movie_path(movie)
+  expect(page.body).to match(/Director:\s#{movie_director}/)
 end

@@ -19,6 +19,11 @@
         0,
         0,
         null,
+        0,
+        0,
+        0,
+        0,
+        0,
         0
       ],
       "/home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/app/controllers/movies_controller.rb": [
@@ -92,8 +97,6 @@
         0,
         0,
         0,
-        0,
-        0,
         null,
         0
       ],
@@ -103,6 +106,6 @@
         0
       ]
     },
-    "timestamp": 1539568402
+    "timestamp": 1539633842
   }
 }
