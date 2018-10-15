@@ -4585,28 +4585,6 @@ Feature: destroy movie
     I want to be able to destroy a movie
 
   Background: movies in database[90m      # features/2.feature:6[0m
-    [32mGiven the following movies exist:[90m # features/step_definitions ./features/step_definitions/web_steps.rb:57:in `/^(?:|I )follow "([^"]*)"$/'[0m
-[31m      features/1.feature:32:in `When I follow "Find Movies With Same Director"'[0m
-    [36mThen I should be on [36m[1mthe home page[0m[0m[36m[90m                                      # features/step_definitions/web_steps.rb:230[0m[0m
-    [36mAnd I should see "[36m[1m'Alien' has no director info[0m[0m[36m"[90m                        # features/step_definitions/web_steps.rb:105[0m[0m
-
-[31mFailing Scenarios:[0m
-[31mcucumber features/1.feature:22[0m[90m # Scenario: find movie with same director[0m
-[31mcucumber features/1.feature:29[0m[90m # Scenario: can't find similar movies if we don't know director (sad path)[0m
-
-3 scenarios ([31m2 failed[0m, [32m1 passed[0m)
-17 steps ([31m2 failed[0m, [36m5 skipped[0m, [32m10 passed[0m)
-0m0.264s
-Coverage report generated for Cucumber Features to /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/coverage. 28 / 55 LOC (50.91%) covered.
-[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cucumber
-Deprecated: Found tags option '~@wip'. Support for '~@tag' will be removed from the next release of Cucumber. Please use 'not @tag' instead.
-Using the default profile...
-Feature: search for movies by director
-  As a movie buff
-  So that I can find movies with my favorite director
-  I want to include and serach on director information in movies I enter
-
-  Background: movies in database[90m      # features/1.feature:7[0m
     [32mGiven the following movies exist:[90m # features/step_definitions/movie_steps.rb:1[0m[0m
       | [36mtitle       [0m[0m |[0m [36mrating[0m[0m |[0m [36mdirector    [0m[0m |[0m [36mrelease_date[0m[0m |[0m
       | [36mStar Wars   [0m[0m |[0m [36mPG    [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1977-05-25  [0m[0m |[0m
@@ -4614,153 +4592,271 @@ Feature: search for movies by director
       | [36mAlien       [0m[0m |[0m [36mR     [0m[0m |[0m [36m            [0m[0m |[0m [36m1979-05-25  [0m[0m |[0m
       | [36mTHX-1138    [0m[0m |[0m [36mR     [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1971-03-11  [0m[0m |[0m
 
-  Scenario: add director to existing movie[90m                # features/1.feature:16[0m
-    [32mWhen I go to [32m[1mthe edit page for "Alien"[0m[0m[32m[90m                # features/step_definitions/web_steps.rb:48[0m[0m
-    [32mAnd I fill in "[32m[1mDirector[0m[0m[32m" with "[32m[1mRidley Scott[0m[0m[32m"[90m          # features/step_definitions/web_steps.rb:60[0m[0m
-    [32mAnd I press "[32m[1mUpdate Movie Info[0m[0m[32m"[90m                       # features/step_definitions/web_steps.rb:52[0m[0m
-    [32mThen the director of "[32m[1mAlien[0m[0m[32m" should be "[32m[1mRidley Scott[0m[0m[32m"[90m # features/step_definitions/movie_steps.rb:7[0m[0m
-
-  Scenario: find movie with same director[90m                       # features/1.feature:22[0m
-    [32mGiven I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m              # features/step_definitions/web_steps.rb:44[0m[0m
-    [31mWhen I follow "[31m[1mFind Movies With Same Director[0m[0m[31m"[90m              # features/step_definitions/web_steps.rb:56[0m[0m
-[31m      undefined method `director' for nil:NilClass (NoMethodError)[0m
-[31m      ./app/models/movie.rb:7:in `similar_movies'[0m
-[31m      ./app/controllers/movies_controller.rb:65:in `same_director'[0m
-[31m      ./features/step_definitions/web_steps.rb:57:in `/^(?:|I )follow "([^"]*)"$/'[0m
-[31m      features/1.feature:24:in `When I follow "Find Movies With Same Director"'[0m
-    [36mThen I should be on [36m[1mthe Similar Movies page for "Star Wars"[0m[0m[36m[90m # features/step_definitions/web_steps.rb:230[0m[0m
-    [36mAnd I should see "[36m[1mTHX-1138[0m[0m[36m"[90m                                 # features/step_definitions/web_steps.rb:105[0m[0m
-    [36mBut I should not see "[36m[1mBlade Runner[0m[0m[36m"[90m                         # features/step_definitions/web_steps.rb:123[0m[0m
-
-  Scenario: can't find similar movies if we don't know director (sad path)[90m # features/1.feature:29[0m
-    [32mGiven I am on [32m[1mthe details page for "Alien"[0m[0m[32m[90m                             # features/step_definitions/web_steps.rb:44[0m[0m
-    [32mThen I should not see "[32m[1mRidley Scott[0m[0m[32m"[90m                                   # features/step_definitions/web_steps.rb:123[0m[0m
-    [31mWhen I follow "[31m[1mFind Movies With Same Director[0m[0m[31m"[90m                         # features/step_definitions/web_steps.rb:56[0m[0m
-[31m      undefined method `director' for nil:NilClass (NoMethodError)[0m
-[31m      ./app/models/movie.rb:7:in `similar_movies'[0m
-[31m      ./app/controllers/movies_controller.rb:65:in `same_director'[0m
-[31m      ./features/step_definitions/web_steps.rb:57:in `/^(?:|I )follow "([^"]*)"$/'[0m
-[31m      features/1.feature:32:in `When I follow "Find Movies With Same Director"'[0m
-    [36mThen I should be on [36m[1mthe home page[0m[0m[36m[90m                                      # features/step_definitions/web_steps.rb:230[0m[0m
-    [36mAnd I should see "[36m[1m'Alien' has no director info[0m[0m[36m"[90m                        # features/step_definitions/web_steps.rb:105[0m[0m
+  Scenario: destroying a movie[90m                     # features/2.feature:15[0m
+    [32mWhen I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m  # features/step_definitions/web_steps.rb:44[0m[0m
+    [32mAnd I press "[32m[1mDelete[0m[0m[32m"[90m                           # features/step_definitions/web_steps.rb:52[0m[0m
+    [32mThen I should see "[32m[1mMovie 'Star Wars' deleted.[0m[0m[32m"[90m # features/step_definitions/web_steps.rb:105[0m[0m
+    [32mAnd I should not see "[32m[1m1977-05-25[0m[0m[32m"[90m              # features/step_definitions/web_steps.rb:123[0m[0m
 
 [31mFailing Scenarios:[0m
 [31mcucumber features/1.feature:22[0m[90m # Scenario: find movie with same director[0m
-[31mcucumber features/1.feature:29[0m[90m # Scenario: can't find similar movies if we don't know director (sad path)[0m
 
-3 scenarios ([31m2 failed[0m, [32m1 passed[0m)
-17 steps ([31m2 failed[0m, [36m5 skipped[0m, [32m10 passed[0m)
-0m0.265s
-Coverage report generated for Cucumber Features to /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/coverage. 28 / 55 LOC (50.91%) covered.
-[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cucumber
-Deprecated: Found tags option '~@wip'. Support for '~@tag' will be removed from the next release of Cucumber. Please use 'not @tag' instead.
-Using the default profile...
-Feature: search for movies by director
-  As a movie buff
-  So that I can find movies with my favorite director
-  I want to include and serach on director information in movies I enter
+4 scenarios ([31m1 failed[0m, [32m3 passed[0m)
+22 steps ([31m1 failed[0m, [36m2 skipped[0m, [32m19 passed[0m)
+0m0.329s
+Coverage report generated for Cucumber Features to /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/coverage. 47 / 56 LOC (83.93%) covered.
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ heroku login
+heroku: Enter your login credentials
+Email [33m[jinhui.yu2009@gmail.com][39m: 
+[2K[GPassword: **********
+Logged in as [32mjinhui.yu2009@gmail.com[39m
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git init
+Reinitialized existing Git repository in /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/.git/
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git add .
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git commit -m "83.93% pass rate"
+[master 9d7ce48] 83.93% pass rate
+ Committer: EC2 Default User <ec2-user@ip-172-31-27-214.us-east-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
 
-  Background: movies in database[90m      # features/1.feature:7[0m
-    [32mGiven the following movies exist:[90m # features/step_definitions/movie_steps.rb:1[0m[0m
-      | [36mtitle       [0m[0m |[0m [36mrating[0m[0m |[0m [36mdirector    [0m[0m |[0m [36mrelease_date[0m[0m |[0m
-      | [36mStar Wars   [0m[0m |[0m [36mPG    [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1977-05-25  [0m[0m |[0m
-      | [36mBlade Runner[0m[0m |[0m [36mPG    [0m[0m |[0m [36mRidley Scott[0m[0m |[0m [36m1982-06-25  [0m[0m |[0m
-      | [36mAlien       [0m[0m |[0m [36mR     [0m[0m |[0m [36m            [0m[0m |[0m [36m1979-05-25  [0m[0m |[0m
-      | [36mTHX-1138    [0m[0m |[0m [36mR     [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1971-03-11  [0m[0m |[0m
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
 
-  Scenario: add director to existing movie[90m                # features/1.feature:16[0m
-    [32mWhen I go to [32m[1mthe edit page for "Alien"[0m[0m[32m[90m                # features/step_definitions/web_steps.rb:48[0m[0m
-    [32mAnd I fill in "[32m[1mDirector[0m[0m[32m" with "[32m[1mRidley Scott[0m[0m[32m"[90m          # features/step_definitions/web_steps.rb:60[0m[0m
-    [32mAnd I press "[32m[1mUpdate Movie Info[0m[0m[32m"[90m                       # features/step_definitions/web_steps.rb:52[0m[0m
-    [32mThen the director of "[32m[1mAlien[0m[0m[32m" should be "[32m[1mRidley Scott[0m[0m[32m"[90m # features/step_definitions/movie_steps.rb:7[0m[0m
+After doing this, you may fix the identity used for this commit with:
 
-  Scenario: find movie with same director[90m                       # features/1.feature:22[0m
-    [32mGiven I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m              # features/step_definitions/web_steps.rb:44[0m[0m
-    [31mWhen I follow "[31m[1mFind Movies With Same Director[0m[0m[31m"[90m              # features/step_definitions/web_steps.rb:56[0m[0m
-[31m      undefined method `director' for nil:NilClass (NoMethodError)[0m
-[31m      ./app/models/movie.rb:7:in `similar_movies'[0m
-[31m      ./app/controllers/movies_controller.rb:65:in `same_director'[0m
-[31m      ./features/step_definitions/web_steps.rb:57:in `/^(?:|I )follow "([^"]*)"$/'[0m
-[31m      features/1.feature:24:in `When I follow "Find Movies With Same Director"'[0m
-    [36mThen I should be on [36m[1mthe Similar Movies page for "Star Wars"[0m[0m[36m[90m # features/step_definitions/web_steps.rb:230[0m[0m
-    [36mAnd I should see "[36m[1mTHX-1138[0m[0m[36m"[90m                                 # features/step_definitions/web_steps.rb:105[0m[0m
-    [36mBut I should not see "[36m[1mBlade Runner[0m[0m[36m"[90m                         # features/step_definitions/web_steps.rb:123[0m[0m
+    git commit --amend --reset-author
 
-  Scenario: can't find similar movies if we don't know director (sad path)[90m # features/1.feature:29[0m
-    [32mGiven I am on [32m[1mthe details page for "Alien"[0m[0m[32m[90m                             # features/step_definitions/web_steps.rb:44[0m[0m
-    [32mThen I should not see "[32m[1mRidley Scott[0m[0m[32m"[90m                                   # features/step_definitions/web_steps.rb:123[0m[0m
-    [31mWhen I follow "[31m[1mFind Movies With Same Director[0m[0m[31m"[90m                         # features/step_definitions/web_steps.rb:56[0m[0m
-[31m      undefined method `director' for nil:NilClass (NoMethodError)[0m
-[31m      ./app/models/movie.rb:7:in `similar_movies'[0m
-[31m      ./app/controllers/movies_controller.rb:65:in `same_director'[0m
-[31m      ./features/step_definitions/web_steps.rb:57:in `/^(?:|I )follow "([^"]*)"$/'[0m
-[31m      features/1.feature:32:in `When I follow "Find Movies With Same Director"'[0m
-    [36mThen I should be on [36m[1mthe home page[0m[0m[36m[90m                                      # features/step_definitions/web_steps.rb:230[0m[0m
-    [36mAnd I should see "[36m[1m'Alien' has no director info[0m[0m[36m"[90m                        # features/step_definitions/web_steps.rb:105[0m[0m
+ 6 files changed, 2828 insertions(+), 814 deletions(-)
+ create mode 100644 features/2.feature
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git push heroku master
+Counting objects: 13, done.
+Compressing objects:   7% (1/13)   Compressing objects:  15% (2/13)   Compressing objects:  23% (3/13)   Compressing objects:  30% (4/13)   Compressing objects:  38% (5/13)   Compressing objects:  46% (6/13)   Compressing objects:  53% (7/13)   Compressing objects:  61% (8/13)   Compressing objects:  69% (9/13)   Compressing objects:  76% (10/13)   Compressing objects:  84% (11/13)   Compressing objects:  92% (12/13)   Compressing objects: 100% (13/13)   Compressing objects: 100% (13/13), done.
+Writing objects:   7% (1/13)   Writing objects:  15% (2/13)   Writing objects:  23% (3/13)   Writing objects:  30% (4/13)   Writing objects:  38% (5/13)   Writing objects:  46% (6/13)   Writing objects:  53% (7/13)   Writing objects:  61% (8/13)   Writing objects:  69% (9/13)   Writing objects:  76% (10/13)   Writing objects:  84% (11/13)   Writing objects:  92% (12/13)   Writing objects: 100% (13/13)   Writing objects: 100% (13/13), 9.68 KiB | 901.00 KiB/s, done.
+Total 13 (delta 9), reused 0 (delta 0)
+remote: Compressing source files... done.[K
+remote: Building source:[K
+remote: 
+remote: -----> Ruby app detected[K
+remote: -----> Compiling Ruby/Rails[K
+remote: -----> Using Ruby version: ruby-2.4.0[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        You have the `.bundle/config` file checked into your repository[K
+remote:         It contains local state like the location of the installed bundle[K
+remote:         as well as configured git local gems, and other settings that should[K
+remote:        not be shared between multiple checkouts of a single repo. Please[K
+remote:        remove the `.bundle/` folder from your repo and add it to your `.gitignore` file.[K
+remote:        https://devcenter.heroku.com/articles/bundler-configuration[K
+remote: 
+remote: -----> Installing dependencies using bundler 1.15.2[K
+remote:        Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment[K
+remote:        Warning: the running version of Bundler (1.15.2) is older than the version that created the lockfile (1.16.5). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.[K
+remote:        Fetching gem metadata from https://rubygems.org/..........[K
+remote:        Fetching version metadata from https://rubygems.org/..[K
+remote:        Fetching dependency metadata from https://rubygems.org/.[K
+remote:        Using rake 12.3.1[K
+remote:        Using concurrent-ruby 1.0.5[K
+remote:        Using minitest 5.11.3[K
+remote:        Using thread_safe 0.3.6[K
+remote:        Using builder 3.2.3[K
+remote:        Using erubis 2.7.0[K
+remote:        Using mini_portile2 2.3.0[K
+remote:        Using crass 1.0.4[K
+remote:        Using rack 1.6.10[K
+remote:        Using mini_mime 1.0.1[K
+remote:        Using arel 6.0.4[K
+remote:        Using bundler 1.15.2[K
+remote:        Using coffee-script-source 1.12.2[K
+remote:        Using execjs 2.7.0[K
+remote:        Using thor 0.20.0[K
+remote:        Using ffi 1.9.25[K
+remote:        Using temple 0.8.0[K
+remote:        Using tilt 2.0.8[K
+remote:        Using rb-fsevent 0.10.3[K
+remote:        Using tzinfo 1.2.5[K
+remote:        Using i18n 0.9.5[K
+remote:        Using nokogiri 1.8.5[K
+remote:        Using rack-test 0.6.3
+remote:        Using sprockets 3.7.2[K
+remote:        Using mail 2.7.1[K
+remote:        Using coffee-script 2.4.1[K
+remote:        Using uglifier 4.1.19[K
+remote:        Using rb-inotify 0.9.10[K
+remote:        Using activesupport 4.2.10[K
+remote:        Using loofah 2.2.2[K
+remote:        Using haml 5.0.4[K
+remote:        Using rails-deprecated_sanitizer 1.0.3[K
+remote:        Using globalid 0.4.1[K
+remote:        Using activemodel 4.2.10[K
+remote:        Using sass-listen 4.0.0[K
+remote:        Using rails-html-sanitizer 1.0.4[K
+remote:        Using rails-dom-testing 1.0.9[K
+remote:        Using activejob 4.2.10[K
+remote:        Using sass 3.6.0[K
+remote:        Using activerecord 4.2.10[K
+remote:        Using actionview 4.2.10[K
+remote:        Using actionpack 4.2.10[K
+remote:        Using actionmailer 4.2.10[K
+remote:        Using railties 4.2.10[K
+remote:        Using sprockets-rails 3.2.1[K
+remote:        Using coffee-rails 4.1.1[K
+remote:        Using jquery-rails 4.3.3[K
+remote:        Using rails 4.2.10[K
+remote:        Using sass-rails 5.0.7[K
+remote:        Bundle complete! 17 Gemfile dependencies, 49 gems now installed.[K
+remote:        Gems in the groups development, test and production were not installed.[K
+remote:        Bundled gems are installed into ./vendor/bundle.[K
+remote:        Bundle completed (3.39s)[K
+remote:        Cleaning up the bundler cache.[K
+remote:        Warning: the running version of Bundler (1.15.2) is older than the version that created the lockfile (1.16.5). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.[K
+remote:        The latest bundler is 1.17.0.pre.2, but you are currently running 1.15.2.[K
+remote:        To update, run `gem install bundler --pre`[K
+remote: -----> Installing node-v8.10.0-linux-x64[K
+remote: -----> Detecting rake tasks[K
+remote: -----> Preparing app for Rails asset pipeline[K
+remote:        Running: rake assets:precompile[K
+remote:        DEPRECATION WARNING: The configuration option `config.serve_static_assets` has been renamed to `config.serve_static_files` to clarify its role (it merely enables serving everything in the `public` folder and is unrelated to the asset pipeline). The `serve_static_assets` alias will be removed in Rails 5.0. Please migrate your configuration files accordingly. (called from block in <top (required)> at /tmp/build_04cc5891949084c85868133da107786a/config/environments/production.rb:15)[K
+remote:        DEPRECATION WARNING: You did not specify a `log_level` in `production.rb`. Currently, the default value for `log_level` is `:info` for the production environment and `:debug` in all other environments. In Rails 5 the default value will be unified to `:debug` across all environments. To preserve the current setting, add the following line to your `production.rb`:[K
+remote:        [K
+remote:           config.log_level = :info[K
+remote:        [K
+remote:        . (called from block in tsort_each at /tmp/build_04cc5891949084c85868133da107786a/vendor/ruby-2.4.0/lib/ruby/2.4.0/tsort.rb:228)[K
+remote:        Asset precompilation completed (1.31s)[K
+remote:        Cleaning assets[K
+remote:        Running: rake assets:clean[K
+remote:        DEPRECATION WARNING: The configuration option `config.serve_static_assets` has been renamed to `config.serve_static_files` to clarify its role (it merely enables serving everything in the `public` folder and is unrelated to the asset pipeline). The `serve_static_assets` alias will be removed in Rails 5.0. Please migrate your configuration files accordingly. (called from block in <top (required)> at /tmp/build_04cc5891949084c85868133da107786a/config/environments/production.rb:15)[K
+remote:        DEPRECATION WARNING: You did not specify a `log_level` in `production.rb`. Currently, the default value for `log_level` is `:info` for the production environment and `:debug` in all other environments. In Rails 5 the default value will be unified to `:debug` across all environments. To preserve the current setting, add the following line to your `production.rb`:[K
+remote:        [K
+remote:           config.log_level = :info[K
+remote:        [K
+remote:        . (called from block in tsort_each at /tmp/build_04cc5891949084c85868133da107786a/vendor/ruby-2.4.0/lib/ruby/2.4.0/tsort.rb:228)[K
+remote: -----> Detecting rails configuration[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        Include 'rails_12factor' gem to enable all platform features[K
+remote:        See https://devcenter.heroku.com/articles/rails-integration-gems for more information.[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        You have the `.bundle/config` file checked into your repository[K
+remote:         It contains local state like the location of the installed bundle[K
+remote:         as well as configured git local gems, and other settings that should[K
+remote:        not be shared between multiple checkouts of a single repo. Please[K
+remote:        remove the `.bundle/` folder from your repo and add it to your `.gitignore` file.[K
+remote:        https://devcenter.heroku.com/articles/bundler-configuration[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        Detecting rails configuration failed[K
+remote:        set HEROKU_DEBUG_RAILS_RUNNER=1 to debug[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        No Procfile detected, using the default web server.[K
+remote:        We recommend explicitly declaring how to boot your server process via a Procfile.[K
+remote:        https://devcenter.heroku.com/articles/ruby-default-web-server[K
+remote: 
+remote: 
+remote: -----> Discovering process types[K
+remote:        Procfile declares types     -> (none)[K
+remote:        Default types for buildpack -> console, rake, web, worker[K
+remote: 
+remote: -----> Compressing...[K
+remote:        Done: 41.9M[K
+remote: -----> Launching...
+remote:        Released v12[K
+remote:        https://mighty-retreat-48309.herokuapp.com/ deployed to Heroku[K
+remote: 
+remote: Verifying deploy... done.[K
+To https://git.heroku.com/mighty-retreat-48309.git
+   a5ce71a..9d7ce48  master -> master
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ rake db:reset
+-- create_table("movies", {:force=>:cascade})
+   -> 0.0065s
+-- initialize_schema_migrations_table()
+   -> 0.0311s
+-- create_table("movies", {:force=>:cascade})
+   -> 0.0047s
+-- initialize_schema_migrations_table()
+   -> 0.0103s
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ rake db:migrate
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ rake db:seed
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ heroku open
+ [31m▸[39m    Error opening web browser.
+ [31m▸[39m    Error: Exited with code 3
+ [31m▸[39m    
+ [31m▸[39m    Manually visit [36mhttps://mighty-retreat-48309.herokuapp.com/[39m in your browser.
+[?25h[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cd
+[01;32mec2-user[00m:[01;34m~[00m $ zip -r hw5.zip rottenpotatoes/app/ rottenpotatoes/config/ rottenpotatoes/db/migrate rottenpotatoes/features/ rottenpotatoes/spec/ rottenpotatoes/Gemfile rottenpotatoes/Gemfile.lock3[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kzip -r hw5.zip rottenpotatoes/app/ rottenpotatoes/config/ rottenpotatoes/db/migrate rottenpotatoes/features/ rottenpotatoes/spec/ rottenpotatoes/Gemfile rottenpotatoes/Gemfile.lock
+	zip warning: name not matched: rottenpotatoes/app/
+	zip warning: name not matched: rottenpotatoes/config/
+	zip warning: name not matched: rottenpotatoes/db/migrate
+	zip warning: name not matched: rottenpotatoes/features/
+	zip warning: name not matched: rottenpotatoes/spec/
+	zip warning: name not matched: rottenpotatoes/Gemfile
+	zip warning: name not matched: rottenpotatoes/Gemfile.lock
 
-[31mFailing Scenarios:[0m
-[31mcucumber features/1.feature:22[0m[90m # Scenario: find movie with same director[0m
-[31mcucumber features/1.feature:29[0m[90m # Scenario: can't find similar movies if we don't know director (sad path)[0m
+zip error: Nothing to do! (try: zip -r hw5.zip . -i rottenpotatoes/app/ rottenpotatoes/config/ rottenpotatoes/db/migrate rottenpotatoes/features/ rottenpotatoes/spec/ rottenpotatoes/Gemfile rottenpotatoes/Gemfile.lock)
+[01;32mec2-user[00m:[01;34m~[00m $ cd hw-acceptance-unit-test-cycle/rottenpotatoes
+bash: cd: hw-acceptance-unit-test-cycle/rottenpotatoes: No such file or directory
+[01;32mec2-user[00m:[01;34m~[00m $ cd ~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git login
+git: 'login' is not a git command. See 'git --help'.
 
-3 scenarios ([31m2 failed[0m, [32m1 passed[0m)
-17 steps ([31m2 failed[0m, [36m5 skipped[0m, [32m10 passed[0m)
-0m0.266s
-Coverage report generated for Cucumber Features to /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/coverage. 28 / 55 LOC (50.91%) covered.
-[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cucumber
-Deprecated: Found tags option '~@wip'. Support for '~@tag' will be removed from the next release of Cucumber. Please use 'not @tag' instead.
-Using the default profile...
-Feature: search for movies by director
-  As a movie buff
-  So that I can find movies with my favorite director
-  I want to include and serach on director information in movies I enter
+The most similar command is
+	column
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git --help
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
 
-  Background: movies in database[90m      # features/1.feature:7[0m
-    [32mGiven the following movies exist:[90m # features/step_definitions/movie_steps.rb:1[0m[0m
-      | [36mtitle       [0m[0m |[0m [36mrating[0m[0m |[0m [36mdirector    [0m[0m |[0m [36mrelease_date[0m[0m |[0m
-      | [36mStar Wars   [0m[0m |[0m [36mPG    [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1977-05-25  [0m[0m |[0m
-      | [36mBlade Runner[0m[0m |[0m [36mPG    [0m[0m |[0m [36mRidley Scott[0m[0m |[0m [36m1982-06-25  [0m[0m |[0m
-      | [36mAlien       [0m[0m |[0m [36mR     [0m[0m |[0m [36m            [0m[0m |[0m [36m1979-05-25  [0m[0m |[0m
-      | [36mTHX-1138    [0m[0m |[0m [36mR     [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1971-03-11  [0m[0m |[0m
+These are common Git commands used in various situations:
 
-  Scenario: add director to existing movie[90m                # features/1.feature:16[0m
-    [32mWhen I go to [32m[1mthe edit page for "Alien"[0m[0m[32m[90m                # features/step_definitions/web_steps.rb:48[0m[0m
-    [32mAnd I fill in "[32m[1mDirector[0m[0m[32m" with "[32m[1mRidley Scott[0m[0m[32m"[90m          # features/step_definitions/web_steps.rb:60[0m[0m
-    [32mAnd I press "[32m[1mUpdate Movie Info[0m[0m[32m"[90m                       # features/step_definitions/web_steps.rb:52[0m[0m
-    [32mThen the director of "[32m[1mAlien[0m[0m[32m" should be "[32m[1mRidley Scott[0m[0m[32m"[90m # features/step_definitions/movie_steps.rb:7[0m[0m
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
 
-  Scenario: find movie with same director[90m                       # features/1.feature:22[0m
-    [32mGiven I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m              # features/step_definitions/web_steps.rb:44[0m[0m
-    [31mWhen I follow "[31m[1mFind Movies With Same Director[0m[0m[31m"[90m              # features/step_definitions/web_steps.rb:56[0m[0m
-[31m      undefined method `director' for nil:NilClass (NoMethodError)[0m
-[31m      ./app/models/movie.rb:7:in `similar_movies'[0m
-[31m      ./app/controllers/movies_controller.rb:65:in `same_director'[0m
-[31m      ./features/step_definitions/web_steps.rb:57:in `/^(?:|I )follow "([^"]*)"$/'[0m
-[31m      features/1.feature:24:in `When I follow "Find Movies With Same Director"'[0m
-    [36mThen I should be on [36m[1mthe Similar Movies page for "Star Wars"[0m[0m[36m[90m # features/step_definitions/web_steps.rb:230[0m[0m
-    [36mAnd I should see "[36m[1mTHX-1138[0m[0m[36m"[90m                                 # features/step_definitions/web_steps.rb:105[0m[0m
-    [36mBut I should not see "[36m[1mBlade Runner[0m[0m[36m"[90m                         # features/step_definitions/web_steps.rb:123[0m[0m
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
 
-  Scenario: can't find similar movies if we don't know director (sad path)[90m # features/1.feature:29[0m
-    [32mGiven I am on [32m[1mthe details page for "Alien"[0m[0m[32m[90m                             # features/step_definitions/web_steps.rb:44[0m[0m
-    [32mThen I should not see "[32m[1mRidley Scott[0m[0m[32m"[90m                                   # features/step_definitions/web_steps.rb:123[0m[0m
-    [31mWhen I follow "[31m[1mFind Movies With Same Director[0m[0m[31m"[90m                         # features/step_definitions/web_steps.rb:56[0m[0m
-[31m      undefined method `director' for nil:NilClass (NoMethodError)[0m
-[31m      ./app/models/movie.rb:7:in `similar_movies'[0m
-[31m      ./app/controllers/movies_controller.rb:65:in `same_director'[0m
-[31m      ./features/step_definitions/web_steps.rb:57:in `/^(?:|I )follow "([^"]*)"$/'[0m
-[31m      features/1.feature:32:in `When I follow "Find Movies With Same Director"'[0m
-    [36mThen I should be on [36m[1mthe home page[0m[0m[36m[90m                                      # features/step_definitions/web_steps.rb:230[0m[0m
-    [36mAnd I should see "[36m[1m'Alien' has no director info[0m[0m[36m"[90m                        # features/step_definitions/web_steps.rb:105[0m[0m
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
 
-[31mFailing Scenarios:[0m
-[31mcucumber features/1.feature:22[0m[90m # Scenario: find movie with same director[0m
-[31mcucumber features/1.feature:29[0m[90m # Scenario: can't find similar movies if we don't know director (sad path)[0m
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
 
-3 scenarios ([31m2 failed[0m, [32m1 passed[0m)
-17 steps ([31m2 failed[0m, [36m5 skipped[0m, [32m10 passed[0m)
-0m0.274s
-Coverage report generated for Cucumber Features to /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/coverage. 28 / 56 LOC (50.0%) covered.
-[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cucumber
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ heruki[Ku[K[K[Koku open
+ [31m▸[39m    Error opening web browser.
+ [31m▸[39m    Error: Exited with code 3
+ [31m▸[39m    
+ [31m▸[39m    Manually visit [36mhttps://mighty-retreat-48309.herokuapp.com/[39m in your browser.
+[?25h[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cucumber
 Deprecated: Found tags option '~@wip'. Support for '~@tag' will be removed from the next release of Cucumber. Please use 'not @tag' instead.
 Using the default profile...
 Feature: search for movies by director
@@ -4786,8 +4882,8 @@ Feature: search for movies by director
     [32mGiven I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m              # features/step_definitions/web_steps.rb:44[0m[0m
     [32mWhen I follow "[32m[1mFind Movies With Same Director[0m[0m[32m"[90m              # features/step_definitions/web_steps.rb:56[0m[0m
     [31mThen I should be on [31m[1mthe Similar Movies page for "Star Wars"[0m[0m[31m[90m # features/step_definitions/web_steps.rb:230[0m[0m
-[31m      undefined method `search_similar_movies_path' for #<Cucumber::Rails::World:0x00000006234870> (NoMethodError)[0m
-[31m      ./features/support/paths.rb:32:in `path_to'[0m
+[31m      undefined method `similar_movies_path' for #<Cucumber::Rails::World:0x00000006425918> (NoMethodError)[0m
+[31m      ./features/support/paths.rb:34:in `path_to'[0m
 [31m      ./features/step_definitions/web_steps.rb:233:in `/^(?:|I )should be on (.+)$/'[0m
 [31m      features/1.feature:25:in `Then I should be on the Similar Movies page for "Star Wars"'[0m
     [36mAnd I should see "[36m[1mTHX-1138[0m[0m[36m"[90m                                 # features/step_definitions/web_steps.rb:105[0m[0m
@@ -4797,53 +4893,14 @@ Feature: search for movies by director
     [32mGiven I am on [32m[1mthe details page for "Alien"[0m[0m[32m[90m                             # features/step_definitions/web_steps.rb:44[0m[0m
     [32mThen I should not see "[32m[1mRidley Scott[0m[0m[32m"[90m                                   # features/step_definitions/web_steps.rb:123[0m[0m
     [32mWhen I follow "[32m[1mFind Movies With Same Director[0m[0m[32m"[90m                         # features/step_definitions/web_steps.rb:56[0m[0m
-    [31mThen I should be on [31m[1mthe home page[0m[0m[31m[90m                                      # features/step_definitions/web_steps.rb:230[0m[0m
-[31m      expected: "/movies"[0m
-[31m           got: "/" (using ==) (RSpec::Expectations::ExpectationNotMetError)[0m
-[31m      ./features/step_definitions/web_steps.rb:233:in `/^(?:|I )should be on (.+)$/'[0m
-[31m      features/1.feature:33:in `Then I should be on the home page'[0m
-    [36mAnd I should see "[36m[1m'Alien' has no director info[0m[0m[36m"[90m                        # features/step_definitions/web_steps.rb:105[0m[0m
+    [32mThen I should be on [32m[1mthe home page[0m[0m[32m[90m                                      # features/step_definitions/web_steps.rb:230[0m[0m
+    [32mAnd I should see "[32m[1m'Alien' has no director info[0m[0m[32m"[90m                        # features/step_definitions/web_steps.rb:105[0m[0m
 
-[31mFailing Scenarios:[0m
-[31mcucumber features/1.feature:22[0m[90m # Scenario: find movie with same director[0m
-[31mcucumber features/1.feature:29[0m[90m # Scenario: can't find similar movies if we don't know director (sad path)[0m
+Feature: destroy movie
+    As a rottenpotatoes user
+    I want to be able to destroy a movie
 
-3 scenarios ([31m2 failed[0m, [32m1 passed[0m)
-17 steps ([31m2 failed[0m, [36m3 skipped[0m, [32m12 passed[0m)
-0m0.305s
-Coverage report generated for Cucumber Features to /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/coverage. 34 / 56 LOC (60.71%) covered.
-[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cucumber
-Deprecated: Found tags option '~@wip'. Support for '~@tag' will be removed from the next release of Cucumber. Please use 'not @tag' instead.
-Using the default profile...
-Feature: search for movies by director
-  As a movie buff
-  So that I can find movies with my favorite director
-  I want to include and serach on director information in movies I enter
-
-  Background: movies in database[90m      # features/1.feature:7[0m
-    [32mGiven the following movies exist:[90m # features/step_definitions/movie_steps.rb:1[0m[0m
-      | [36mtitle       [0m[0m |[0m [36mrating[0m[0m |[0m [36mdirector    [0m[0m |[0m [36mrelease_date[0m[0m |[0m
-      | [36mStar Wars   [0m[0m |[0m [36mPG    [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1977-05-25  [0m[0m |[0m
-      | [36mBlade Runner[0m[0m |[0m [36mPG    [0m[0m |[0m [36mRidley Scott[0m[0m |[0m [36m1982-06-25  [0m[0m |[0m
-      | [36mAlien       [0m[0m |[0m [36mR     [0m[0m |[0m [36m            [0m[0m |[0m [36m1979-05-25  [0m[0m |[0m
-      | [36mTHX-1138    [0m[0m |[0m [36mR     [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1971-03-11  [0m[0m |[0m
-
-  Scenario: add director to existing movie[90m                # features/1.feature:16[0m
-    [32mWhen I go to [32m[1mthe edit page for "Alien"[0m[0m[32m[90m                # features/step_definitions/web_steps.rb:48[0m[0m
-    [32mAnd I fill in "[32m[1mDirector[0m[0m[32m" with "[32m[1mRidley Scott[0m[0m[32m"[90m          # features/step_definitions/web_steps.rb:60[0m[0m
-    [32mAnd I press "[32m[1mUpdate Movie Info[0m[0m[32m"[90m                       # features/step_definitions/web_steps.rb:52[0m[0m
-    [32mThen the director of "[32m[1mAlien[0m[0m[32m" should be "[32m[1mRidley Scott[0m[0m[32m"[90m # features/step_definitions/movie_steps.rb:7[0m[0m
-
-  Scenario: find movie with same director[90m                       # features/1.feature:22[0m
-    [32mGiven I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m              # features/step_definitions/web_steps.rb:44[0m[0m
-    [32mWhen I follow "[32m[1mFind Movies With Same Director[0m[0m[32m"[90m              # features/step_definitions/web_steps.rb:56[0m[0m
-    [31mThen I should be on [31m[1mthe Similar Movies page for "Star Wars"[0m[0m[31m[90m # features/step_definitions/web_steps.rb:230[0m[0m
-[31m      undefined method `search_similar_movies_path' for #<Cucumber::Rails::World:0x00000007c204a0> (NoMethodError)[0m
-[31m      ./features/support/paths.rb:32:in `path_to'[0m
-[31m      ./features/step_definitions/web_steps.rb:233:in `/^(?:|I )should be on (.+)$/'[0m
-[31m      features/1.feature:25:in `Then I should be on the Similar Movies page for "Star Wars"'[0m
-    [36mAnd I should see "[36m[1mTHX-1138[0m[0m[36m"[90m                                 # features/step_definitions/web_steps.rb:105[0m[0m
-    [36mBut I should not see "[36m[1mBlade Runner[0m[0m[36m"[90m                         # features/step_definitions/web_steps.rb:123[0m[0m
+  Background: movi             # features/step_definitions/web_steps.rb:123[0m[0m
 
   Scenario: can't find similar movies if we don't know director (sad path)[90m # features/1.feature:29[0m
     [32mGiven I am on [32m[1mthe details page for "Alien"[0m[0m[32m[90m                             # features/step_definitions/web_steps.rb:44[0m[0m
@@ -5839,4 +5896,319 @@ Feature: search for movies by director
     [32mThen I should not see "[32m[1mRidley Scott[0m[0m[32m"[90m                                   # features/step_definitions/web_steps.rb:123[0m[0m
     [32mWhen I follow "[32m[1mFind Movies With Same Director[0m[0m[32m"[90m                         # features/step_definitions/web_steps.rb:56[0m[0m
     [32mThen I should be on [32m[1mthe home page[0m[0m[32m[90m                                      # features/step_definitions/web_steps.rb:230[0m[0m
-    [32mAnd I should see "[32m[1m'Alien' has no director info[0m[0m[32m"[90m              
+    [32mAnd I should see "[32m[1m'Alien' has no director info[0m[0m[32m"[90m                        # features/step_definitions/web_steps.rb:105[0m[0m
+
+Feature: destroy movie
+    As a rottenpotatoes user
+    I want to be able to destroy a movie
+
+  Background: movies in database[90m      # features/2.feature:6[0m
+    [32mGiven the following movies exist:[90m # features/step_definitions/movie_steps.rb:1[0m[0m
+      | [36mtitle       [0m[0m |[0m [36mrating[0m[0m |[0m [36mdirector    [0m[0m |[0m [36mrelease_date[0m[0m |[0m
+      | [36mStar Wars   [0m[0m |[0m [36mPG    [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1977-05-25  [0m[0m |[0m
+      | [36mBlade Runner[0m[0m |[0m [36mPG    [0m[0m |[0m [36mRidley Scott[0m[0m |[0m [36m1982-06-25  [0m[0m |[0m
+      | [36mAlien       [0m[0m |[0m [36mR     [0m[0m |[0m [36m            [0m[0m |[0m [36m1979-05-25  [0m[0m |[0m
+      | [36mTHX-1138    [0m[0m |[0m [36mR     [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1971-03-11  [0m[0m |[0m
+
+  Scenario: destroying a movie[90m                     # features/2.feature:15[0m
+    [32mWhen I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m  # features/step_definitions/web_steps.rb:44[0m[0m
+    [32mAnd I press "[32m[1mDelete[0m[0m[32m"[90m                           # features/step_definitions/web_steps.rb:52[0m[0m
+    [32mThen I should see "[32m[1mMovie 'Star Wars' deleted.[0m[0m[32m"[90m # features/step_definitions/web_steps.rb:105[0m[0m
+    [32mAnd I should not see "[32m[1m1977-05-25[0m[0m[32m"[90m              # features/step_definitions/web_steps.rb:123[0m[0m
+
+[31mFailing Scenarios:[0m
+[31mcucumber features/1.feature:22[0m[90m # Scenario: find movie with same director[0m
+
+4 scenarios ([31m1 failed[0m, [32m3 passed[0m)
+22 steps ([31m1 failed[0m, [36m2 skipped[0m, [32m19 passed[0m)
+0m0.329s
+Coverage report generated for Cucumber Features to /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/coverage. 47 / 56 LOC (83.93%) covered.
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ heroku login
+heroku: Enter your login credentials
+Email [33m[jinhui.yu2009@gmail.com][39m: 
+[2K[GPassword: **********
+Logged in as [32mjinhui.yu2009@gmail.com[39m
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git init
+Reinitialized existing Git repository in /home/ec2-user/environment/hw-acceptance-unit-test-cycle/rottenpotatoes/.git/
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git add .
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git commit -m "83.93% pass rate"
+[master 9d7ce48] 83.93% pass rate
+ Committer: EC2 Default User <ec2-user@ip-172-31-27-214.us-east-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 6 files changed, 2828 insertions(+), 814 deletions(-)
+ create mode 100644 features/2.feature
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git push heroku master
+Counting objects: 13, done.
+Compressing objects:   7% (1/13)   Compressing objects:  15% (2/13)   Compressing objects:  23% (3/13)   Compressing objects:  30% (4/13)   Compressing objects:  38% (5/13)   Compressing objects:  46% (6/13)   Compressing objects:  53% (7/13)   Compressing objects:  61% (8/13)   Compressing objects:  69% (9/13)   Compressing objects:  76% (10/13)   Compressing objects:  84% (11/13)   Compressing objects:  92% (12/13)   Compressing objects: 100% (13/13)   Compressing objects: 100% (13/13), done.
+Writing objects:   7% (1/13)   Writing objects:  15% (2/13)   Writing objects:  23% (3/13)   Writing objects:  30% (4/13)   Writing objects:  38% (5/13)   Writing objects:  46% (6/13)   Writing objects:  53% (7/13)   Writing objects:  61% (8/13)   Writing objects:  69% (9/13)   Writing objects:  76% (10/13)   Writing objects:  84% (11/13)   Writing objects:  92% (12/13)   Writing objects: 100% (13/13)   Writing objects: 100% (13/13), 9.68 KiB | 901.00 KiB/s, done.
+Total 13 (delta 9), reused 0 (delta 0)
+remote: Compressing source files... done.[K
+remote: Building source:[K
+remote: 
+remote: -----> Ruby app detected[K
+remote: -----> Compiling Ruby/Rails[K
+remote: -----> Using Ruby version: ruby-2.4.0[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        You have the `.bundle/config` file checked into your repository[K
+remote:         It contains local state like the location of the installed bundle[K
+remote:         as well as configured git local gems, and other settings that should[K
+remote:        not be shared between multiple checkouts of a single repo. Please[K
+remote:        remove the `.bundle/` folder from your repo and add it to your `.gitignore` file.[K
+remote:        https://devcenter.heroku.com/articles/bundler-configuration[K
+remote: 
+remote: -----> Installing dependencies using bundler 1.15.2[K
+remote:        Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment[K
+remote:        Warning: the running version of Bundler (1.15.2) is older than the version that created the lockfile (1.16.5). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.[K
+remote:        Fetching gem metadata from https://rubygems.org/..........[K
+remote:        Fetching version metadata from https://rubygems.org/..[K
+remote:        Fetching dependency metadata from https://rubygems.org/.[K
+remote:        Using rake 12.3.1[K
+remote:        Using concurrent-ruby 1.0.5[K
+remote:        Using minitest 5.11.3[K
+remote:        Using thread_safe 0.3.6[K
+remote:        Using builder 3.2.3[K
+remote:        Using erubis 2.7.0[K
+remote:        Using mini_portile2 2.3.0[K
+remote:        Using crass 1.0.4[K
+remote:        Using rack 1.6.10[K
+remote:        Using mini_mime 1.0.1[K
+remote:        Using arel 6.0.4[K
+remote:        Using bundler 1.15.2[K
+remote:        Using coffee-script-source 1.12.2[K
+remote:        Using execjs 2.7.0[K
+remote:        Using thor 0.20.0[K
+remote:        Using ffi 1.9.25[K
+remote:        Using temple 0.8.0[K
+remote:        Using tilt 2.0.8[K
+remote:        Using rb-fsevent 0.10.3[K
+remote:        Using tzinfo 1.2.5[K
+remote:        Using i18n 0.9.5[K
+remote:        Using nokogiri 1.8.5[K
+remote:        Using rack-test 0.6.3
+remote:        Using sprockets 3.7.2[K
+remote:        Using mail 2.7.1[K
+remote:        Using coffee-script 2.4.1[K
+remote:        Using uglifier 4.1.19[K
+remote:        Using rb-inotify 0.9.10[K
+remote:        Using activesupport 4.2.10[K
+remote:        Using loofah 2.2.2[K
+remote:        Using haml 5.0.4[K
+remote:        Using rails-deprecated_sanitizer 1.0.3[K
+remote:        Using globalid 0.4.1[K
+remote:        Using activemodel 4.2.10[K
+remote:        Using sass-listen 4.0.0[K
+remote:        Using rails-html-sanitizer 1.0.4[K
+remote:        Using rails-dom-testing 1.0.9[K
+remote:        Using activejob 4.2.10[K
+remote:        Using sass 3.6.0[K
+remote:        Using activerecord 4.2.10[K
+remote:        Using actionview 4.2.10[K
+remote:        Using actionpack 4.2.10[K
+remote:        Using actionmailer 4.2.10[K
+remote:        Using railties 4.2.10[K
+remote:        Using sprockets-rails 3.2.1[K
+remote:        Using coffee-rails 4.1.1[K
+remote:        Using jquery-rails 4.3.3[K
+remote:        Using rails 4.2.10[K
+remote:        Using sass-rails 5.0.7[K
+remote:        Bundle complete! 17 Gemfile dependencies, 49 gems now installed.[K
+remote:        Gems in the groups development, test and production were not installed.[K
+remote:        Bundled gems are installed into ./vendor/bundle.[K
+remote:        Bundle completed (3.39s)[K
+remote:        Cleaning up the bundler cache.[K
+remote:        Warning: the running version of Bundler (1.15.2) is older than the version that created the lockfile (1.16.5). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.[K
+remote:        The latest bundler is 1.17.0.pre.2, but you are currently running 1.15.2.[K
+remote:        To update, run `gem install bundler --pre`[K
+remote: -----> Installing node-v8.10.0-linux-x64[K
+remote: -----> Detecting rake tasks[K
+remote: -----> Preparing app for Rails asset pipeline[K
+remote:        Running: rake assets:precompile[K
+remote:        DEPRECATION WARNING: The configuration option `config.serve_static_assets` has been renamed to `config.serve_static_files` to clarify its role (it merely enables serving everything in the `public` folder and is unrelated to the asset pipeline). The `serve_static_assets` alias will be removed in Rails 5.0. Please migrate your configuration files accordingly. (called from block in <top (required)> at /tmp/build_04cc5891949084c85868133da107786a/config/environments/production.rb:15)[K
+remote:        DEPRECATION WARNING: You did not specify a `log_level` in `production.rb`. Currently, the default value for `log_level` is `:info` for the production environment and `:debug` in all other environments. In Rails 5 the default value will be unified to `:debug` across all environments. To preserve the current setting, add the following line to your `production.rb`:[K
+remote:        [K
+remote:           config.log_level = :info[K
+remote:        [K
+remote:        . (called from block in tsort_each at /tmp/build_04cc5891949084c85868133da107786a/vendor/ruby-2.4.0/lib/ruby/2.4.0/tsort.rb:228)[K
+remote:        Asset precompilation completed (1.31s)[K
+remote:        Cleaning assets[K
+remote:        Running: rake assets:clean[K
+remote:        DEPRECATION WARNING: The configuration option `config.serve_static_assets` has been renamed to `config.serve_static_files` to clarify its role (it merely enables serving everything in the `public` folder and is unrelated to the asset pipeline). The `serve_static_assets` alias will be removed in Rails 5.0. Please migrate your configuration files accordingly. (called from block in <top (required)> at /tmp/build_04cc5891949084c85868133da107786a/config/environments/production.rb:15)[K
+remote:        DEPRECATION WARNING: You did not specify a `log_level` in `production.rb`. Currently, the default value for `log_level` is `:info` for the production environment and `:debug` in all other environments. In Rails 5 the default value will be unified to `:debug` across all environments. To preserve the current setting, add the following line to your `production.rb`:[K
+remote:        [K
+remote:           config.log_level = :info[K
+remote:        [K
+remote:        . (called from block in tsort_each at /tmp/build_04cc5891949084c85868133da107786a/vendor/ruby-2.4.0/lib/ruby/2.4.0/tsort.rb:228)[K
+remote: -----> Detecting rails configuration[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        Include 'rails_12factor' gem to enable all platform features[K
+remote:        See https://devcenter.heroku.com/articles/rails-integration-gems for more information.[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        You have the `.bundle/config` file checked into your repository[K
+remote:         It contains local state like the location of the installed bundle[K
+remote:         as well as configured git local gems, and other settings that should[K
+remote:        not be shared between multiple checkouts of a single repo. Please[K
+remote:        remove the `.bundle/` folder from your repo and add it to your `.gitignore` file.[K
+remote:        https://devcenter.heroku.com/articles/bundler-configuration[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        Detecting rails configuration failed[K
+remote:        set HEROKU_DEBUG_RAILS_RUNNER=1 to debug[K
+remote: 
+remote: [1m[33m###### WARNING:[0m[K
+remote: 
+remote:        No Procfile detected, using the default web server.[K
+remote:        We recommend explicitly declaring how to boot your server process via a Procfile.[K
+remote:        https://devcenter.heroku.com/articles/ruby-default-web-server[K
+remote: 
+remote: 
+remote: -----> Discovering process types[K
+remote:        Procfile declares types     -> (none)[K
+remote:        Default types for buildpack -> console, rake, web, worker[K
+remote: 
+remote: -----> Compressing...[K
+remote:        Done: 41.9M[K
+remote: -----> Launching...
+remote:        Released v12[K
+remote:        https://mighty-retreat-48309.herokuapp.com/ deployed to Heroku[K
+remote: 
+remote: Verifying deploy... done.[K
+To https://git.heroku.com/mighty-retreat-48309.git
+   a5ce71a..9d7ce48  master -> master
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ rake db:reset
+-- create_table("movies", {:force=>:cascade})
+   -> 0.0065s
+-- initialize_schema_migrations_table()
+   -> 0.0311s
+-- create_table("movies", {:force=>:cascade})
+   -> 0.0047s
+-- initialize_schema_migrations_table()
+   -> 0.0103s
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ rake db:migrate
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ rake db:seed
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ heroku open
+ [31m▸[39m    Error opening web browser.
+ [31m▸[39m    Error: Exited with code 3
+ [31m▸[39m    
+ [31m▸[39m    Manually visit [36mhttps://mighty-retreat-48309.herokuapp.com/[39m in your browser.
+[?25h[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ [K[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cd
+[01;32mec2-user[00m:[01;34m~[00m $ zip -r hw5.zip rottenpotatoes/app/ rottenpotatoes/config/ rottenpotatoes/db/migrate rottenpotatoes/features/ rottenpotatoes/spec/ rottenpotatoes/Gemfile rottenpotatoes/Gemfile.lock3[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kzip -r hw5.zip rottenpotatoes/app/ rottenpotatoes/config/ rottenpotatoes/db/migrate rottenpotatoes/features/ rottenpotatoes/spec/ rottenpotatoes/Gemfile rottenpotatoes/Gemfile.lock
+	zip warning: name not matched: rottenpotatoes/app/
+	zip warning: name not matched: rottenpotatoes/config/
+	zip warning: name not matched: rottenpotatoes/db/migrate
+	zip warning: name not matched: rottenpotatoes/features/
+	zip warning: name not matched: rottenpotatoes/spec/
+	zip warning: name not matched: rottenpotatoes/Gemfile
+	zip warning: name not matched: rottenpotatoes/Gemfile.lock
+
+zip error: Nothing to do! (try: zip -r hw5.zip . -i rottenpotatoes/app/ rottenpotatoes/config/ rottenpotatoes/db/migrate rottenpotatoes/features/ rottenpotatoes/spec/ rottenpotatoes/Gemfile rottenpotatoes/Gemfile.lock)
+[01;32mec2-user[00m:[01;34m~[00m $ cd hw-acceptance-unit-test-cycle/rottenpotatoes
+bash: cd: hw-acceptance-unit-test-cycle/rottenpotatoes: No such file or directory
+[01;32mec2-user[00m:[01;34m~[00m $ cd ~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git login
+git: 'login' is not a git command. See 'git --help'.
+
+The most similar command is
+	column
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ git --help
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ heruki[Ku[K[K[Koku open
+ [31m▸[39m    Error opening web browser.
+ [31m▸[39m    Error: Exited with code 3
+ [31m▸[39m    
+ [31m▸[39m    Manually visit [36mhttps://mighty-retreat-48309.herokuapp.com/[39m in your browser.
+[?25h[01;32mec2-user[00m:[01;34m~/environment/hw-acceptance-unit-test-cycle/rottenpotatoes[00m (master) $ cucumber
+Deprecated: Found tags option '~@wip'. Support for '~@tag' will be removed from the next release of Cucumber. Please use 'not @tag' instead.
+Using the default profile...
+Feature: search for movies by director
+  As a movie buff
+  So that I can find movies with my favorite director
+  I want to include and serach on director information in movies I enter
+
+  Background: movies in database[90m      # features/1.feature:7[0m
+    [32mGiven the following movies exist:[90m # features/step_definitions/movie_steps.rb:1[0m[0m
+      | [36mtitle       [0m[0m |[0m [36mrating[0m[0m |[0m [36mdirector    [0m[0m |[0m [36mrelease_date[0m[0m |[0m
+      | [36mStar Wars   [0m[0m |[0m [36mPG    [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1977-05-25  [0m[0m |[0m
+      | [36mBlade Runner[0m[0m |[0m [36mPG    [0m[0m |[0m [36mRidley Scott[0m[0m |[0m [36m1982-06-25  [0m[0m |[0m
+      | [36mAlien       [0m[0m |[0m [36mR     [0m[0m |[0m [36m            [0m[0m |[0m [36m1979-05-25  [0m[0m |[0m
+      | [36mTHX-1138    [0m[0m |[0m [36mR     [0m[0m |[0m [36mGeorge Lucas[0m[0m |[0m [36m1971-03-11  [0m[0m |[0m
+
+  Scenario: add director to existing movie[90m                # features/1.feature:16[0m
+    [32mWhen I go to [32m[1mthe edit page for "Alien"[0m[0m[32m[90m                # features/step_definitions/web_steps.rb:48[0m[0m
+    [32mAnd I fill in "[32m[1mDirector[0m[0m[32m" with "[32m[1mRidley Scott[0m[0m[32m"[90m          # features/step_definitions/web_steps.rb:60[0m[0m
+    [32mAnd I press "[32m[1mUpdate Movie Info[0m[0m[32m"[90m                       # features/step_definitions/web_steps.rb:52[0m[0m
+    [32mThen the director of "[32m[1mAlien[0m[0m[32m" should be "[32m[1mRidley Scott[0m[0m[32m"[90m # features/step_definitions/movie_steps.rb:7[0m[0m
+
+  Scenario: find movie with same director[90m                       # features/1.feature:22[0m
+    [32mGiven I am on [32m[1mthe details page for "Star Wars"[0m[0m[32m[90m              # features/step_definitions/web_steps.rb:44[0m[0m
+    [32mWhen I follow "[32m[1mFind Movies With Same Director[0m[0m[32m"[90m              # features/step_definitions/web_steps.rb:56[0m[0m
+    [31mThen I should be on [31m[1mthe Similar Movies page for "Star Wars"[0m[0m[31m[90m # features/step_definitions/web_steps.rb:230[0m[0m
+[31m      undefined method `similar_movies_path' for #<Cucumber::Rails::World:0x00000006425918> (NoMethodError)[0m
+[31m      ./features/support/paths.rb:34:in `path_to'[0m
+[31m      ./features/step_definitions/web_steps.rb:233:in `/^(?:|I )should be on (.+)$/'[0m
+[31m      features/1.feature:25:in `Then I should be on the Similar Movies page for "Star Wars"'[0m
+    [36mAnd I should see "[36m[1mTHX-1138[0m[0m[36m"[90m                                 # features/step_definitions/web_steps.rb:105[0m[0m
+    [36mBut I should not see "[36m[1mBlade Runner[0m[0m[36m"[90m                         # features/step_definitions/web_steps.rb:123[0m[0m
+
+  Scenario: can't find similar movies if we don't know director (sad path)[90m # features/1.feature:29[0m
+    [32mGiven I am on [32m[1mthe details page for "Alien"[0m[0m[32m[90m                             # features/step_definitions/web_steps.rb:44[0m[0m
+    [32mThen I should not see "[32m[1mRidley Scott[0m[0m[32m"[90m                                   # features/step_definitions/web_steps.rb:123[0m[0m
+    [32mWhen I follow "[32m[1mFind Movies With Same Director[0m[0m[32m"[90m                         # features/step_definitions/web_steps.rb:56[0m[0m
+    [32mThen I should be on [32m[1mthe home page[0m[0m[32m[90m                                      # features/step_definit
